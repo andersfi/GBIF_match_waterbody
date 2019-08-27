@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-data/* # ignore data folder
-!somefolder/README.txt # exeption
+data/* 
+!data/README.txt
