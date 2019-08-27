@@ -6,7 +6,6 @@ Issue to be resolved: Information on waterbody is crucial when doing analyses on
 ```bash
 
 ├── data
-├── docs
 ├── GBIF_occurrence_to_waterbody.Rproj
 ├── R
 └── README.md
