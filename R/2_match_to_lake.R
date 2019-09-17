@@ -10,21 +10,24 @@ library(mapview)
 
 #------------------------------------------------------------------------------
 # load lake layer
-# Example dataset used below is NVE lake database
-# downloaded from NVE 2019-08-24. Data are realesed from NVE under a
-# cc-by eqvivalent, site as "NVE Innsjødatabasen, downloaded from https://kartkatalog.nve.no/
-# 2019-08-24". 
+# Example dataset used fennoscandian a lake dataset from the NOFA database (https://github.com/ninaNor/nofa/wiki)
+# sharing links below directs to a simple feture object (SF) stored in .rdf format
 #------------------------------------------------------------------------------
 
-# NVE innsjødatabsen convinience download -----------------------------------
-temp <- tempdir()
-download.file("https://ntnu.box.com/shared/static/6vu4de2birf9onmej2gorexwaxposuaa.zip",destfile = paste0(temp,"/NVE_innsjodatabasen.zip"))
-unzip(paste0(temp,"/NVE_innsjodatabasen.zip"),exdir=temp)
-lakes <- st_read(paste0(temp,"/Innsjo_Innsjo.shp"))
-saveRDS(lakes,"./data/lake_polygons.rds")
-unlink(temp)
+# Fennoscandian lake data convinience download -----------------------------------
 
-lakes <- readRDS("./data/lake_polygons.rds")
+Finnish_data_url <- "https://api.loke.aws.unit.no/dlr-gui-backend-resources-content/v2/contents/links/565cfeef-59bb-44de-b616-4f7a02cbef408559ef0b-7ffd-4d03-b5b6-15a30a58b41f04742bb2-3f6f-4aef-9f09-a3e65861bdbf"
+Norwegian_data_url <- "https://api.loke.aws.unit.no/dlr-gui-backend-resources-content/v2/contents/links/aa79c15a-eb88-489b-8b20-4cb6275766cd4f48325a-d84b-4395-93ea-ccd3283c8d04197a8a81-9d30-4f94-a3c3-b4c2532fc2a5"
+Swedish_data_url <- "https://api.loke.aws.unit.no/dlr-gui-backend-resources-content/v2/contents/links/b440d734-03bc-4226-853f-e2b8810b65193ff6b1ab-74e4-40f7-9fbd-5f70d80cf19b215d0dbd-b311-42f3-ab57-6c954c515320"
+Fennoscandia_data_url <- "https://api.loke.aws.unit.no/dlr-gui-backend-resources-content/v2/contents/links/571d50fd-6db0-45e7-b955-144407ecd33cb6afba4b-0762-44e7-9f8d-a3af4241f93953100f03-6f92-49af-97d9-aaac791a3c13"
+
+
+temp <- tempdir()
+download.file(Norwegian_data_url,destfile = paste0(temp,"/lakes.rds"))
+lakes <- readRDS(paste0(temp,"/lakes.rds"))
+unlink(temp)
+# saveRDS(lakes,"./data/lake_polygons.rds") # convinience storage of data locally
+#lakes <- readRDS("./data/lake_polygons.rds")
 
 #-------------------------------------------------------------------------------------------------
 # load GBIF occurrence data and convert to EPSG:32633 (or whatever the same as the lake dataset)
